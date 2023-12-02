@@ -1036,12 +1036,12 @@ function Converter({ navigation }: any): JSX.Element {
         <View style={styles.Body}>
           <View style={styles.InputOutput}>
               <View style={styles.Category}>
-                <Dropdown items={conversionCategoryItems} onChange={setConversionCategory} />
+                <Dropdown items={conversionCategoryItems} onChange={setConversionCategory} placeholder='Select a Category...'/>
               </View>
               <View style={styles.Screen}>
                 <View style={styles.ScreenRow}>
                   <View style={styles.ScreenSelect}>
-                    <Dropdown items={itemList} onChange={setMeasurement1} />
+                    <Dropdown items={itemList} onChange={setMeasurement1} placeholder='Measurement'/>
                   </View>
                 </View>
                 <Text style={styles.ScreenNumericalValues}>{ inputValue }</Text>
@@ -1049,7 +1049,7 @@ function Converter({ navigation }: any): JSX.Element {
               <View style={styles.Screen}>
                 <View style={styles.ScreenRow}>
                   <View style={styles.ScreenSelect}>
-                    <Dropdown items={itemList} onChange={setMeasurement2} />
+                    <Dropdown items={itemList} onChange={setMeasurement2} placeholder='Measurement'/>
                   </View>
                 </View>
                 <Text style={styles.ScreenNumericalValues}>{ outputValue }</Text>
