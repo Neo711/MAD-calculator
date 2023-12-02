@@ -16,8 +16,6 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Converter from './screens/Converter';
-
 
 import {
   Colors,
@@ -27,6 +25,21 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Simple from './screens/Simple';
+
+type SectionProps = PropsWithChildren<{
+  title: string;
+}>;
+
+function Section({children, title}: SectionProps): JSX.Element {
+  const isDarkMode = useColorScheme() === 'dark';
+  return (
+    <View>
+      
+    </View>
+  );
+}
+
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -35,16 +48,26 @@ function App(): JSX.Element {
   };
 
   return (
-
+    <Simple/>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
   },
-  body: {
-    backgroundColor: Colors.white,
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
   },
 });
 
