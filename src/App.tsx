@@ -25,30 +25,38 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Simple from './screens/Simple';
+import Scientific from './screens/Scientific';
+import Converter from './screens/Converter';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+function HomeScreen() {
   return (
-    <View>
-      
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
     </View>
   );
 }
 
+const Stack = createNativeStackNavigator();
+
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <Simple/>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Converter">
+        <Stack.Screen name="Home" component={Simple} options={{headerShown: false}}/>
+        <Stack.Screen name="Simple" component={Simple} options={{headerShown: false}}/>
+        <Stack.Screen name="Scientific" component={Scientific} options={{headerShown: false}}/>
+        <Stack.Screen name="Converter" component={Converter} options={{headerShown: false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+    
   );
 }
 

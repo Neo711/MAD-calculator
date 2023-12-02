@@ -15,7 +15,7 @@ import {
 import Dropdown from '../components/Dropdown';
 
 
-function Converter(): JSX.Element {
+function Converter({ navigation }): JSX.Element {
   // Dark Mode Settings
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
@@ -160,7 +160,6 @@ function Converter(): JSX.Element {
     { label: 'Century', value: '11', key: 'Century' },
   ]
 
-
   const onPressHandler = (button: string) => {
     let temp = inputValue;
     if (temp === '0') {
@@ -168,18 +167,6 @@ function Converter(): JSX.Element {
     }
 
     switch (button) {
-      case 'Simple':
-        // Navigate to Simple Calculator
-        break;
-      case 'Scientific':
-        // Navigate to Scientific Calculator
-        break;
-      case 'Graphing':
-        // Navigate to Graphing Calculator
-        break;
-      case 'Converter':
-        // Navigate to Converter
-        break;
       case '0':
       case '1':
       case '2':
@@ -211,6 +198,7 @@ function Converter(): JSX.Element {
         break;
       case 'Undo':
         // Undo last action
+        // TODO - Implement undo
         break;
       case '=':
         calculate();
@@ -1045,8 +1033,6 @@ function Converter(): JSX.Element {
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
         <View style={styles.Body}>
           <View style={styles.InputOutput}>
               <View style={styles.Category}>
@@ -1071,16 +1057,16 @@ function Converter(): JSX.Element {
           </View>
           <View style={styles.Buttons}>
             <View style={styles.ButtonRow}>
-                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Simple')}>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Simple")}>
                   <Text style={styles.NavigationText}>Simple</Text>
                 </Pressable>                     
-                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Scientific')}>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Scientific")}>
                   <Text style={styles.NavigationText}>Scientific</Text>
                 </Pressable>
-                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Graphing')}>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Graphing")}>
                   <Text style={styles.NavigationText}>Graphing</Text>
                 </Pressable>
-                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Converter')}>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Converter")}>
                   <Text style={styles.NavigationText}>Converter</Text>
                 </Pressable>
             </View>
@@ -1142,8 +1128,6 @@ function Converter(): JSX.Element {
             </View>                
           </View>        
         </View>
-      </ScrollView>
-    </SafeAreaView>
   );
 }
 
