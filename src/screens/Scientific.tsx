@@ -106,6 +106,8 @@ const Scientific = ({ navigation }: any) => {
 
     return (
         <View style={ styles.container }>
+            <Text style = {styles.Text}>{state}</Text>
+            <View style={styles.View}>
             <View style={styles.ButtonRow}>
                 <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Simple")}>
                   <Text style={styles.NavigationText}>Simple</Text>
@@ -120,8 +122,6 @@ const Scientific = ({ navigation }: any) => {
                   <Text style={styles.NavigationText}>Converter</Text>
                 </Pressable>
             </View>
-            <Text style = {styles.Text}>{state}</Text>
-            <View style={styles.View}>
             <Pressable style = {styles.Pressable} key="C" onPress={() => handlePress('clear', '')}><Text>C</Text>
             </Pressable>
             <Pressable style = {styles.Pressable} key="." onPress={() => handlePress('decimal', '.')} ><Text>.</Text>
@@ -178,6 +178,7 @@ const Scientific = ({ navigation }: any) => {
                 </Pressable>
             ))}
             </View>
+            
         </View>
     );
 };
