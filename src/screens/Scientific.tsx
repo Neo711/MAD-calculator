@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Text, View, StyleSheet, Pressable } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 
-const Scientific = () => {
+const Scientific = ({ navigation }: any) => {
     const [state, setState] = React.useState('Enter Number');
 
     const calculator = (type:any, value:any, prevState:any) => {
@@ -105,6 +106,20 @@ const Scientific = () => {
 
     return (
         <View style={ styles.container }>
+            <View style={styles.ButtonRow}>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Simple")}>
+                  <Text style={styles.NavigationText}>Simple</Text>
+                </Pressable>                     
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Scientific")}>
+                  <Text style={styles.NavigationText}>Scientific</Text>
+                </Pressable>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Graphing")}>
+                  <Text style={styles.NavigationText}>Graphing</Text>
+                </Pressable>
+                <Pressable style={styles.Navigation} onPress={() => navigation.navigate("Converter")}>
+                  <Text style={styles.NavigationText}>Converter</Text>
+                </Pressable>
+            </View>
             <Text style = {styles.Text}>{state}</Text>
             <View style={styles.View}>
             <Pressable style = {styles.Pressable} key="C" onPress={() => handlePress('clear', '')}><Text>C</Text>
@@ -168,6 +183,35 @@ const Scientific = () => {
 };
 
 const styles = StyleSheet.create({
+    // Gabriel
+    ButtonRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 5,
+        width: '90%',
+    },
+
+    Navigation: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#D9D9D9',
+        color: Colors.grey,
+        padding: 5,
+        textAlign: 'center',
+        width: 80,
+        height: 80,
+        borderRadius: 80/2,
+      },
+    
+      NavigationText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+      },
+
+    // Ben
     container: {
         flex: 1,
         backgroundColor: '#4F4F4F',
