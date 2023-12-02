@@ -1,0 +1,11 @@
+{
+    "cSpell.words": [
+        "Exabit",
+        "Petabit",
+        "Yottabit",
+        "Yottabyte",
+        "Zettabit",
+        "Zettabyte"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
+}
