@@ -15,7 +15,7 @@ import {
 import Dropdown from '../components/Dropdown';
 
 
-function Converter({ navigation }): JSX.Element {
+function Converter({ navigation }: any): JSX.Element {
   // Dark Mode Settings
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
