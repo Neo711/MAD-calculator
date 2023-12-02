@@ -49,10 +49,10 @@ const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Converter">
+      <Stack.Navigator initialRouteName="Simple">
         <Stack.Screen name="Home" component={Simple} options={{headerShown: false}}/>
-        <Stack.Screen name="Simple" component={Simple} options={{headerShown: false}}/>
         <Stack.Screen name="Scientific" component={Scientific} options={{headerShown: false}}/>
+        <Stack.Screen name="Graphing" component={Scientific} options={{headerShown: false}}/>
         <Stack.Screen name="Converter" component={Converter} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
