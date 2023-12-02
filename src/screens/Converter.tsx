@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {
   Button,
+  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -202,8 +203,8 @@ function Converter(): JSX.Element {
         temp = String(Number(temp) * -1);
         break;
       case 'C':
-        setInputValue('0.00');
-        setOutputValue('0.00');
+        temp = '0';
+        setOutputValue('0');
         break;
       case 'DEL':
         temp = String(temp).slice(0, -1);
@@ -212,7 +213,7 @@ function Converter(): JSX.Element {
         // Undo last action
         break;
       case '=':
-        // Calculate
+        calculate();
         break;
       default:
         break;
@@ -224,35 +225,819 @@ function Converter(): JSX.Element {
     switch (conversionCategory) {
       case '0':
         // Area
-        // Convert to square meter and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to square meter
+        switch (measurement1) {
+          case '0':
+            // Square Kilometer
+            temp = temp * 1000000;
+            break;
+          case '1':
+            // Square Meter
+            temp = temp * 1;
+            break;
+          case '2':
+            // Square Mile
+            temp = temp * 2590000;
+            break;
+          case '3':
+            // Square Yard
+            temp = temp * 0.83612736;
+            break;
+          case '4':
+            // Square Foot
+            temp = temp * 0.09290304;
+            break;
+          case '5':
+            // Square Inch
+            temp = temp * 0.00064516;
+            break;
+          case '6':
+            // Hectare
+            temp = temp * 10000;
+            break;
+          case '7':
+            // Acre
+            temp = temp * 4046.8564224;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Square Kilometer
+            temp = temp / 1000000;
+            break;
+          case '1':
+            // Square Meter
+            temp = temp / 1;
+            break;
+          case '2':
+            // Square Mile
+            temp = temp / 2590000;
+            break;
+          case '3':
+            // Square Yard
+            temp = temp / 0.83612736;
+            break;
+          case '4':
+            // Square Foot
+            temp = temp / 0.09290304;
+            break;
+          case '5':
+            // Square Inch
+            temp = temp / 0.00064516;
+            break;
+          case '6':
+            // Hectare
+            temp = temp / 10000;
+            break;
+          case '7':
+            // Acre
+            temp = temp / 4046.8564224;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 12) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '1':
         // Length
-        // Convert to meter and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to meter 
+        switch (measurement1) {
+          case '0':
+            // Kilometer
+            temp = temp * 1000;
+            break;
+          case '1':
+            // Meter
+            temp = temp * 1;
+            break;
+          case '2':
+            // Centimeter
+            temp = temp * 0.01;
+            break;
+          case '3':
+            // Millimeter
+            temp = temp * 0.001;
+            break;
+          case '4':
+            // Micrometer
+            temp = temp * 0.000001;
+            break;
+          case '5':
+            // Nanometer
+            temp = temp * 0.000000001;
+            break;
+          case '6':
+            // Mile
+            temp = temp * 1609.344;
+            break;
+          case '7':
+            // Yard
+            temp = temp * 0.9144;
+            break;
+          case '8':
+            // Foot
+            temp = temp * 0.3048;
+            break;
+          case '9':
+            // Inch
+            temp = temp * 0.0254;
+            break;
+          case '10':
+            // Nautical Mile
+            temp = temp * 1852;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Kilometer
+            temp = temp / 1000;
+            break;
+          case '1':
+            // Meter
+            temp = temp / 1;
+            break;
+          case '2':
+            // Centimeter
+            temp = temp / 0.01;
+            break;
+          case '3':
+            // Millimeter
+            temp = temp / 0.001;
+            break;
+          case '4':
+            // Micrometer
+            temp = temp / 0.000001;
+            break;
+          case '5':
+            // Nanometer
+            temp = temp / 0.000000001;
+            break;
+          case '6':
+            // Mile
+            temp = temp / 1609.344;
+            break;
+          case '7':
+            // Yard
+            temp = temp / 0.9144;
+            break;
+          case '8':
+            // Foot
+            temp = temp / 0.3048;
+            break;
+          case '9':
+            // Inch
+            temp = temp / 0.0254;
+            break;
+          case '10':
+            // Nautical Mile
+            temp = temp / 1852;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '2':
         // Temperature
-        // Convert to Celsius and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to Celsius
+        switch (measurement1) {
+          case '0':
+            // Celsius
+            temp = temp * 1;
+            break;
+          case '1':
+            // Fahrenheit
+            temp = (temp - 32) * 5/9;
+            break;
+          case '2':
+            // Kelvin
+            temp = temp - 273.15;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Celsius
+            temp = temp / 1;
+            break;
+          case '1':
+            // Fahrenheit
+            temp = (temp * 9/5) + 32;
+            break;
+          case '2':
+            // Kelvin
+            temp = temp + 273.15;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '3':
         // Volume
-        // Convert to liter and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to liter 
+        switch (measurement1) {
+          case '0':
+            // Cubic Kilometer
+            temp = temp * 1000000000000;
+            break;
+          case '1':
+            // Cubic Meter
+            temp = temp * 1000;
+            break;
+          case '2':
+            // Cubic Centimeter
+            temp = temp * 0.001;
+            break;
+          case '3':
+            // Liter
+            temp = temp * 1;
+            break;
+          case '4':
+            // Milliliter
+            temp = temp * 0.001;
+            break;
+          case '5':
+            // US Gallon
+            temp = temp * 3.785411784;
+            break;
+          case '6':
+            // US Quart
+            temp = temp * 0.946352946;
+            break;
+          case '7':
+            // US Pint
+            temp = temp * 0.473176473;
+            break;
+          case '8':
+            // US Cup
+            temp = temp * 0.236588236;
+            break;
+          case '9':
+            // US Fluid Ounce
+            temp = temp * 0.0295735296;
+            break;
+          case '10':
+            // US Tablespoon
+            temp = temp * 0.0147867648;
+            break;
+          case '11':
+            // US Teaspoon
+            temp = temp * 0.00492892159;
+            break;
+          case '12':
+            // Cubic Mile
+            temp = temp * 4168181825440;
+            break;
+          case '13':
+            // Cubic Yard
+            temp = temp * 764.554857984;
+            break;
+          case '14':
+            // Cubic Foot
+            temp = temp * 28.316846592;
+            break;
+          case '15':
+            // Cubic Inch
+            temp = temp * 0.016387064;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Cubic Kilometer
+            temp = temp / 1000000000000;
+            break;
+          case '1':
+            // Cubic Meter
+            temp = temp / 1000;
+            break;
+          case '2':
+            // Cubic Centimeter
+            temp = temp / 0.001;
+            break;
+          case '3':
+            // Liter
+            temp = temp / 1;
+            break;
+          case '4':
+            // Milliliter
+            temp = temp / 0.001;
+            break;
+          case '5':
+            // US Gallon
+            temp = temp / 3.785411784;
+            break;
+          case '6':
+            // US Quart
+            temp = temp / 0.946352946;
+            break;
+          case '7':
+            // US Pint
+            temp = temp / 0.473176473;
+            break;
+          case '8':
+            // US Cup
+            temp = temp / 0.236588236;
+            break;
+          case '9':
+            // US Fluid Ounce
+            temp = temp / 0.0295735296;
+            break;
+          case '10':
+            // US Tablespoon
+            temp = temp / 0.0147867648;
+            break;
+          case '11':
+            // US Teaspoon
+            temp = temp / 0.00492892159;
+            break;
+          case '12':
+            // Cubic Mile
+            temp = temp / 4168181825440;
+            break;
+          case '13':
+            // Cubic Yard
+            temp = temp / 764.554857984;
+            break;
+          case '14':
+            // Cubic Foot
+            temp = temp / 28.316846592;
+            break;
+          case '15':
+            // Cubic Inch
+            temp = temp / 0.016387064;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '4':
         // Mass
-        // Convert to kilogram and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to kilogram 
+        switch (measurement1) {
+          case '0':
+            // Metric Ton
+            temp = temp * 1000;
+            break;
+          case '1':
+            // Kilogram
+            temp = temp * 1;
+            break;
+          case '2':
+            // Gram
+            temp = temp * 0.001;
+            break;
+          case '3':
+            // Milligram
+            temp = temp * 0.000001;
+            break;
+          case '4':
+            // Mcg
+            temp = temp * 0.000000001;
+            break;
+          case '5':
+            // Long Ton
+            temp = temp * 1016.0469088;
+            break;
+          case '6':
+            // Short Ton
+            temp = temp * 907.18474;
+            break;
+          case '7':
+            // Stone
+            temp = temp * 6.35029318;
+            break;
+          case '8':
+            // Pound
+            temp = temp * 0.45359237;
+            break;
+          case '9':
+            // Ounce
+            temp = temp * 0.0283495231;
+            break;
+          default:
+            break;
+        }
+        //Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Metric Ton
+            temp = temp / 1000;
+            break;
+          case '1':
+            // Kilogram
+            temp = temp / 1;
+            break;
+          case '2':
+            // Gram
+            temp = temp / 0.001;
+            break;
+          case '3':
+            // Milligram
+            temp = temp / 0.000001;
+            break;
+          case '4':
+            // Mcg
+            temp = temp / 0.000000001;
+            break;
+          case '5':
+            // Long Ton
+            temp = temp / 1016.0469088;
+            break;
+          case '6':
+            // Short Ton
+            temp = temp / 907.18474;
+            break;
+          case '7':
+            // Stone
+            temp = temp / 6.35029318;
+            break;
+          case '8':
+            // Pound
+            temp = temp / 0.45359237;
+            break;
+          case '9':
+            // Ounce
+            temp = temp / 0.0283495231;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '5':
         // Data
-        // Convert to bit and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to bit 
+        switch (measurement1) {
+          case '0':
+            // Bit
+            temp = temp * 1;
+            break;
+          case '1':
+            // Byte
+            temp = temp * 8;
+            break;
+          case '2':
+            // Kilobit
+            temp = temp * 1000;
+            break;
+          case '3':
+            // Kilobyte
+            temp = temp * 8000;
+            break;
+          case '4':
+            // Megabit
+            temp = temp * 1000000;
+            break;
+          case '5':
+            // Megabyte
+            temp = temp * 8000000;
+            break;
+          case '6':
+            // Gigabit
+            temp = temp * 1000000000;
+            break;
+          case '7':
+            // Gigabyte
+            temp = temp * 8000000000;
+            break;
+          case '8':
+            // Terabit
+            temp = temp * 1000000000000;
+            break;
+          case '9':
+            // Terabyte
+            temp = temp * 8000000000000;
+            break;
+          case '10':
+            // Petabit
+            temp = temp * 1000000000000000;
+            break;
+          case '11':
+            // Petabyte
+            temp = temp * 8000000000000000;
+            break;
+          case '12':
+            // Exabit
+            temp = temp * 1000000000000000000;
+            break;
+          case '13':
+            // Exabyte
+            temp = temp * 8000000000000000000;
+            break;
+          case '14':
+            // Zettabit
+            temp = temp * 1000000000000000000000;
+            break;
+          case '15':
+            // Zettabyte
+            temp = temp * 8000000000000000000000;
+            break;
+          case '16':
+            // Yottabit
+            temp = temp * 1000000000000000000000000;
+            break;
+          case '17':
+            // Yottabyte
+            temp = temp * 8000000000000000000000000;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Bit
+            temp = temp / 1;
+            break;
+          case '1':
+            // Byte
+            temp = temp / 8;
+            break;
+          case '2':
+            // Kilobit
+            temp = temp / 1000;
+            break;
+          case '3':
+            // Kilobyte
+            temp = temp / 8000;
+            break;
+          case '4':
+            // Megabit
+            temp = temp / 1000000;
+            break;
+          case '5':
+            // Megabyte
+            temp = temp / 8000000;
+            break;
+          case '6':
+            // Gigabit
+            temp = temp / 1000000000;
+            break;
+          case '7':
+            // Gigabyte
+            temp = temp / 8000000000;
+            break;
+          case '8':
+            // Terabit
+            temp = temp / 1000000000000;
+            break;
+          case '9':
+            // Terabyte
+            temp = temp / 8000000000000;
+            break;
+          case '10':
+            // Petabit
+            temp = temp / 1000000000000000;
+            break;
+          case '11':
+            // Petabyte
+            temp = temp / 8000000000000000;
+            break;
+          case '12':
+            // Exabit
+            temp = temp / 1000000000000000000;
+            break;
+          case '13':
+            // Exabyte
+            temp = temp / 8000000000000000000;
+            break;
+          case '14':
+            // Zettabit
+            temp = temp / 1000000000000000000000;
+            break;
+          case '15':
+            // Zettabyte
+            temp = temp / 8000000000000000000000;
+            break;
+          case '16':
+            // Yottabit
+            temp = temp / 1000000000000000000000000;
+            break;
+          case '17':
+            // Yottabyte
+            temp = temp / 8000000000000000000000000;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '6':
         // Speed
-        // Convert to meter/second and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to meter/second 
+        switch (measurement1) {
+          case '0':
+            // Meter/Second
+            temp = temp * 1;
+            break;
+          case '1':
+            // Kilometer/Hour
+            temp = temp * 0.277777778;
+            break;
+          case '2':
+            // Mile/Hour
+            temp = temp * 0.44704;
+            break;
+          case '3':
+            // Knot
+            temp = temp * 0.514444444;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Meter/Second
+            temp = temp / 1;
+            break;
+          case '1':
+            // Kilometer/Hour
+            temp = temp / 0.277777778;
+            break;
+          case '2':
+            // Mile/Hour
+            temp = temp / 0.44704;
+            break;
+          case '3':
+            // Knot
+            temp = temp / 0.514444444;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       case '7':
         // Time
-        // Convert to second and then to desired unit
+        var temp = Number(inputValue);
+        // Convert to second
+        switch (measurement1) {
+          case '0':
+            // Nanosecond
+            temp = temp * 0.000000001;
+            break;
+          case '1':
+            // Microsecond
+            temp = temp * 0.000001;
+            break;
+          case '2':
+            // Millisecond
+            temp = temp * 0.001;
+            break;
+          case '3':
+            // Second
+            temp = temp * 1;
+            break;
+          case '4':
+            // Minute
+            temp = temp * 60;
+            break;
+          case '5':
+            // Hour
+            temp = temp * 3600;
+            break;
+          case '6':
+            // Day
+            temp = temp * 86400;
+            break;
+          case '7':
+            // Week
+            temp = temp * 604800;
+            break;
+          case '8':
+            // Month
+            temp = temp * 2629800;
+            break;
+          case '9':
+            // Year
+            temp = temp * 31557600;
+            break;
+          case '10':
+            // Decade
+            temp = temp * 315576000;
+            break;
+          case '11':
+            // Century
+            temp = temp * 3155760000;
+            break;
+          default:
+            break;
+        }
+        // Convert to desired unit
+        switch (measurement2) {
+          case '0':
+            // Nanosecond
+            temp = temp / 0.000000001;
+            break;
+          case '1':
+            // Microsecond
+            temp = temp / 0.000001;
+            break;
+          case '2':
+            // Millisecond
+            temp = temp / 0.001;
+            break;
+          case '3':
+            // Second
+            temp = temp / 1;
+            break;
+          case '4':
+            // Minute
+            temp = temp / 60;
+            break;
+          case '5':
+            // Hour
+            temp = temp / 3600;
+            break;
+          case '6':
+            // Day
+            temp = temp / 86400;
+            break;
+          case '7':
+            // Week
+            temp = temp / 604800;
+            break;
+          case '8':
+            // Month
+            temp = temp / 2629800;
+            break;
+          case '9':
+            // Year
+            temp = temp / 31557600;
+            break;
+          case '10':
+            // Decade
+            temp = temp / 315576000;
+            break;
+          case '11':
+            // Century
+            temp = temp / 3155760000;
+            break;
+          default:
+            break;
+        }
+        temp = Number(temp.toFixed(6));
+        if (temp.toString().length > 11) {
+          setOutputValue('Unavailable');
+        } else {
+        setOutputValue(String(temp));
+        }
         break;
       default:
         break;
@@ -262,44 +1047,98 @@ function Converter(): JSX.Element {
   return (
     <SafeAreaView style={backgroundStyle}>
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-        <View style={{ backgroundColor: isDarkMode ? Colors.black : Colors.white }}>
-          <View>
-              <Dropdown items={conversionCategoryItems} onChange={setConversionCategory} />
-              <Dropdown items={itemList} onChange={setMeasurement1} />
-              <Text>{ inputValue }</Text>
-              <Dropdown items={itemList} onChange={setMeasurement2} />
-              <Text>{ outputValue }</Text>
+        <View style={styles.Body}>
+          <View style={styles.InputOutput}>
+              <View style={styles.Category}>
+                <Dropdown items={conversionCategoryItems} onChange={setConversionCategory} />
+              </View>
+              <View style={styles.Screen}>
+                <View style={styles.ScreenRow}>
+                  <View style={styles.ScreenSelect}>
+                    <Dropdown items={itemList} onChange={setMeasurement1} />
+                  </View>
+                </View>
+                <Text style={styles.ScreenNumericalValues}>{ inputValue }</Text>
+              </View>
+              <View style={styles.Screen}>
+                <View style={styles.ScreenRow}>
+                  <View style={styles.ScreenSelect}>
+                    <Dropdown items={itemList} onChange={setMeasurement2} />
+                  </View>
+                </View>
+                <Text style={styles.ScreenNumericalValues}>{ outputValue }</Text>
+              </View>
           </View>
-          <View>
-            <View>
-                <Button title="Simple" color="#841584" onPress={() => onPressHandler('Simple')}/>                      
-                <Button title="Scientific" color="#841584" onPress={() => onPressHandler('Scientific')}/>
-                <Button title="Graphing" color="#841584" onPress={() => onPressHandler('Graphing')}/>
-                <Button title="Converter" color="#841584" onPress={() => onPressHandler('Converter')}/>
+          <View style={styles.Buttons}>
+            <View style={styles.ButtonRow}>
+                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Simple')}>
+                  <Text style={styles.NavigationText}>Simple</Text>
+                </Pressable>                     
+                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Scientific')}>
+                  <Text style={styles.NavigationText}>Scientific</Text>
+                </Pressable>
+                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Graphing')}>
+                  <Text style={styles.NavigationText}>Graphing</Text>
+                </Pressable>
+                <Pressable style={styles.Navigation} onPress={() => onPressHandler('Converter')}>
+                  <Text style={styles.NavigationText}>Converter</Text>
+                </Pressable>
             </View>
-            <View>
-                <Button title="7" color="#841584" onPress={() => onPressHandler('7')}/>
-                <Button title="8" color="#841584" onPress={() => onPressHandler('8')}/>
-                <Button title="9" color="#841584" onPress={() => onPressHandler('9')}/>
-                <Button title="Undo" color="#841584" onPress={() => onPressHandler('Undo')}/>
+            <View style={styles.ButtonRow}>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('7')}>
+                  <Text style={styles.NumberText}>7</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('8')}>
+                  <Text style={styles.NumberText}>8</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('9')}>
+                  <Text style={styles.NumberText}>9</Text>
+                </Pressable>
+                <Pressable style={styles.Accent} onPress={() => onPressHandler('Undo')}>
+                  <Text style={styles.AccentText}>Undo</Text>
+                </Pressable>
             </View>
-            <View>
-                <Button title="4" color="#841584" onPress={() => onPressHandler('4')}/>
-                <Button title="5" color="#841584" onPress={() => onPressHandler('5')}/>
-                <Button title="6" color="#841584" onPress={() => onPressHandler('6')}/>
-                <Button title="DEL" color="#841584" onPress={() => onPressHandler('DEL')}/>
+            <View style={styles.ButtonRow}>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('4')}>
+                  <Text style={styles.NumberText}>4</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('5')}>
+                  <Text style={styles.NumberText}>5</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('6')}>
+                  <Text style={styles.NumberText}>6</Text>
+                </Pressable>
+                <Pressable style={styles.Accent} onPress={() => onPressHandler('DEL')}>
+                  <Text style={styles.AccentText}>DEL</Text>
+                </Pressable>
             </View>
-            <View>
-                <Button title="1" color="#841584" onPress={() => onPressHandler('1')}/>
-                <Button title="2" color="#841584" onPress={() => onPressHandler('2')}/>
-                <Button title="3" color="#841584" onPress={() => onPressHandler('3')}/>
-                <Button title="C" color="#841584" onPress={() => onPressHandler('C')}/>
+            <View style={styles.ButtonRow}>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('1')}>
+                  <Text style={styles.NumberText}>1</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('2')}>
+                  <Text style={styles.NumberText}>2</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('3')}>
+                  <Text style={styles.NumberText}>3</Text>
+                </Pressable>
+                <Pressable style={styles.Accent} onPress={() => onPressHandler('C')}>
+                  <Text style={styles.AccentText}>C</Text>
+                </Pressable>
             </View>
-            <View>
-                <Button title="+/-" color="#841584" onPress={() => onPressHandler('+/-')}/>
-                <Button title="0 " color="#841584" onPress={() => onPressHandler('0')}/>
-                <Button title="." color="#841584" onPress={() => onPressHandler('.')}/>
-                <Button title="=" color="#841584" onPress={() => onPressHandler('=')}/>
+            <View style={styles.ButtonRow}>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('+/-')}>
+                  <Text style={styles.NumberText}>+/-</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('0')}>
+                  <Text style={styles.NumberText}>0</Text>
+                </Pressable>
+                <Pressable style={styles.Number} onPress={() => onPressHandler('.')}>
+                  <Text style={styles.NumberText}>.</Text>
+                </Pressable>
+                <Pressable style={styles.Accent} onPress={() => onPressHandler('=')}>
+                  <Text style={styles.AccentText}>=</Text>
+                </Pressable>
             </View>                
           </View>        
         </View>
@@ -309,7 +1148,143 @@ function Converter(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  Body: {
+    backgroundColor: '#4F4F4F',
+    fontFamily: 'PTSans',
+    color: Colors.black,
+    height: '100%',
+  },
 
+  InputOutput: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+
+  Category: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'center',
+    width: '95%',
+    height: 50,
+    backgroundColor: '#EBAC4E',
+    color: Colors.black,
+    margin: 10,
+    borderRadius: 8,
+  },
+
+  Screen: {
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: '#777777',
+    border: '2px black solid',
+    width: 'auto',
+    height: 140,
+    margin: 10,
+    borderRadius: 8,
+  },
+
+  ScreenRow: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '50%',
+    height: '50%',
+  },
+
+  ScreenSelect: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EBAC4E',
+    color: Colors.black,
+    height: '50%',
+    borderRadius: 10,
+    margin: 5,
+    padding: 2,
+  },
+
+  ScreenNumericalValues: {
+    fontSize: 60,
+    textAlign: 'right',
+    width: '100%',
+    height: '100%',
+  },
+
+  Number: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#D9D9D9',
+    color: Colors.black,
+    padding: 5,
+    textAlign: 'center',
+    height: 80,
+    width: 80,
+    borderRadius: 80/2,
+  },
+
+  NumberText: {
+    fontSize: 40,
+    fontWeight: 'bold',
+  },
+
+  Accent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#EBAC4E',
+    color: Colors.black,
+    padding: 5,
+    textAlign: 'center',
+    height: 80,
+    width: 80,
+    borderRadius: 80/2,
+  },
+
+  AccentText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+
+  Navigation: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#D9D9D9',
+    color: Colors.grey,
+    padding: 5,
+    textAlign: 'center',
+    width: 80,
+    height: 80,
+    borderRadius: 80/2,
+  },
+
+  NavigationText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+
+
+  Buttons: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+
+  ButtonRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
+    width: '90%',
+  },
 });
 
 export default Converter;
