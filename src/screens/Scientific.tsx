@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, StyleSheet, Pressable } from 'react-native';
 
 
 
@@ -104,40 +104,104 @@ const Scientific = () => {
     
 
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style = {{fontSize: 30}}>{state}</Text>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        <View style={ styles.container }>
+            <Text style = {styles.Text}>{state}</Text>
+            <View style={styles.View}>
+            <Pressable style = {styles.Pressable} key="C" onPress={() => handlePress('clear', '')}><Text>C</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="." onPress={() => handlePress('decimal', '.')} ><Text>.</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="+/-" onPress={() => handlePress('posneg', '')} ><Text>+/-</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="%" onPress={() => handlePress('percentage', '%')} ><Text>%</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="=" onPress={() => handlePress('equal','')} ><Text>=</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="/" onPress={() => handlePress('operator', '/')} ><Text>/</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="*" onPress={() => handlePress('operator', '*')} ><Text>*</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="-" onPress={() => handlePress('operator', '-')} ><Text>-</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="+" onPress={() => handlePress('operator', '+')} ><Text>+</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="PI" onPress={() => handlePress('operator', String(Math.PI))}><Text>PI</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="e" onPress={() => handlePress('operator', String(Math.E))}><Text>e</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="e^x" onPress={() => handlePress('operator', String(Math.exp(parseFloat(state))))} ><Text>e^x</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="sqrt" onPress={() => handlePress('operator', String(Math.sqrt(parseFloat(state))))} ><Text>sqrt</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="cbrt" onPress={() => handlePress('operator', String(Math.cbrt(parseFloat(state))))} ><Text>cbrt</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="Log" onPress={() => handlePress('operator', String(Math.log(parseFloat(state))))} ><Text>Log</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="Log10" onPress={() => handlePress('operator', String(Math.log10(parseFloat(state))))} ><Text>Log10</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="Log2" onPress={() => handlePress('operator', String(Math.log2(parseFloat(state))))} ><Text>Log2</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="Log10base(e)" onPress={() => handlePress('operator', String(Math.LOG10E))} ><Text>Log10base(e)</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="Ln10" onPress={() => handlePress('operator', String(Math.LN10))} ><Text>Ln10</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="Ln2" onPress={() => handlePress('operator', String(Math.LN2))} ><Text>Ln2</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="2^x" onPress={() => handlePress('operator', '2^x')} ><Text>2^x</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="x^y" onPress={() => handlePress('operator', 'x^y')} ><Text>x^y</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="n!" onPress={() => handleFactorial()} ><Text>n!</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="x^2" onPress={() => handleSquare()} ><Text>x^2</Text>
+            </Pressable>
+            <Pressable style = {styles.Pressable} key="x^3" onPress={() => handleCube()} ><Text>x^3</Text>
+            </Pressable>
             {['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].map((number) => (
-                <Button key={number} title={number} onPress={() => handlePress('number', number)} />
+                <Pressable style = {styles.Pressable} key={number} onPress={() => handlePress('number', number)}>
+                    <Text>{number}</Text>
+                </Pressable>
             ))}
-            <Button title="C" onPress={() => handlePress('clear', '')} />
-            <Button title="." onPress={() => handlePress('decimal', '.')} />
-            <Button title="+/-" onPress={() => handlePress('posneg', '')} />
-            <Button title="%" onPress={() => handlePress('percentage', '%')} />
-            <Button title="/" onPress={() => handlePress('operator', '/')} />
-            <Button title="*" onPress={() => handlePress('operator', '*')} />
-            <Button title="-" onPress={() => handlePress('operator', '-')} />
-            <Button title="+" onPress={() => handlePress('operator', '+')} />
-            <Button title="PI" onPress={() => handlePress('operator', String(Math.PI))}/>
-            <Button title="e" onPress={() => handlePress('operator', String(Math.E))}/>
-            <Button title="e^x" onPress={() => handlePress('operator', String(Math.exp(parseFloat(state))))} />
-            <Button title="sqrt" onPress={() => handlePress('operator', String(Math.sqrt(parseFloat(state))))} />
-            <Button title="cbrt" onPress={() => handlePress('operator', String(Math.cbrt(parseFloat(state))))} />
-            <Button title="Log" onPress={() => handlePress('operator', String(Math.log(parseFloat(state))))} />
-            <Button title="Log10" onPress={() => handlePress('operator', String(Math.log10(parseFloat(state))))} />
-            <Button title="Log2" onPress={() => handlePress('operator', String(Math.log2(parseFloat(state))))} />
-            <Button title="Log10base(e)" onPress={() => handlePress('operator', String(Math.LOG10E))} />
-            <Button title="Ln10" onPress={() => handlePress('operator', String(Math.LN10))} />
-            <Button title="Ln2" onPress={() => handlePress('operator', String(Math.LN2))} />
-            <Button title="2^x" onPress={() => handlePress('operator', '2^x')} />
-            <Button title="x^y" onPress={() => handlePress('operator', 'x^y')} />
-            <Button title="n!" onPress={() => handleFactorial()} />
-            <Button title="x^2" onPress={() => handleSquare()} />
-            <Button title="x^3" onPress={() => handleCube()} />
-            <Button title="=" onPress={() => handlePress('equal','')} />
             </View>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#4F4F4F',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        padding: 10,
+        fontSize : 100,
+    },
+
+    View : {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 0,
+        backgroundColor : '#777777',
+
+    },
+
+    Text : {
+        fontSize : 50,
+        color : '#D9D9D9',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    Pressable: {
+        width : 74,
+        height : 74,
+        borderRadius : 50,
+        backgroundColor : '#D9D9D9',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    });
 
 export default Scientific;
