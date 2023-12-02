@@ -35,7 +35,7 @@ function App(): JSX.Element {
   };
 
   return (
-    <Converter />
+
   );
 }
 
